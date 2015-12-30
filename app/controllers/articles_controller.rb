@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 	before_action :find_article, only: [:show, :edit, :destroy, :update]
 	def index
-		@articles = Article.all
+		@articles = Article.all.order("created_at DESC")
 	end
 
 	def new
@@ -19,6 +19,11 @@ class ArticlesController < ApplicationController
 		else
 			render 'new'
 		end
+	end
+
+	def destroy
+		@article.destroy
+		redirect_to root_path
 	end
 
 	private	
